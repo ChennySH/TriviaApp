@@ -3,13 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:p="clr-namespace:TriviaApp.ViewModels" x:DataType="p:RegisterPageViewModel"
              mc:Ignorable="d"
              x:Class="TriviaApp.Views.RegisterPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="{Binding ErrorMessege}" HorizontalOptions="Center" TextColor="Red"/>
+            <Label Text="Email"/>
+            <Entry Placeholder="Email" Text="{Binding Email}"/>
+            <Label Text="NickName"/>
+            <Entry Placeholder="NickName" Text="{Binding NickName}"/>
+            <Label Text="Password"/>
+            <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True"/>
+            <Label Text="Repeat Password"/>
+            <Entry Placeholder="Repeat Password" Text="{Binding RepeatedPasseord}" IsPassword="True"/>
+            <Button Text="Register" Command="{Binding RegisterCommand}" HorizontalOptions="Center"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

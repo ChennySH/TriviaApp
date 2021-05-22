@@ -8,6 +8,7 @@ using TriviaApp.Models;
 using Xamarin.Forms;
 using TriviaApp.Services;
 using System.Threading.Tasks;
+using TriviaApp.Views;
 
 namespace TriviaApp.ViewModels
 {
@@ -17,7 +18,12 @@ namespace TriviaApp.ViewModels
         {
             this.email = "";
             this.password = "";
-            currentUser = null;
+            proxy = TriviaAppWebApiProxy.CreateProxy();
+        }
+        public LoginPageViewModel(string email, string password)
+        {
+            this.email = email;
+            this.password = password;
             proxy = TriviaAppWebApiProxy.CreateProxy();
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -58,19 +64,42 @@ namespace TriviaApp.ViewModels
                 }
             }
         }
-        private User currentUser;
+        private string errorMessege;
+        public string ErrorMessege
+        {
+            get
+            {
+                return errorMessege;
+            }
+            set
+            {
+                if(errorMessege != value)
+                {
+                    errorMessege = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public ICommand LoginCommand => new Command(LoginMethod);
-
+        public Action<Page> LogInEvent;
         private async void LoginMethod()
         {
-            if(this.email != "" && this.password != "" && currentUser == null)
+            if (this.email != "" && this.password != "")
             {
-                currentUser = await this.proxy.LoginAsync(this.email, this.password);
+                User currentUser = await this.proxy.LoginAsync(this.email, this.password);
+                if (currentUser != null)
+                {
+                    HomePage p = new HomePage();
+                    p.BindingContext = new HomePageViewModel(currentUser);
+                    LogInEvent(p);
+                }
+                else
+                {
+                    ErrorMessege = "Email or Password incorrect";
+                }
             }
-            if(currentUser != null)
-            {
-                
-            }
+            else
+                ErrorMessege = "Please enter email and password";
         }
     }
 }
