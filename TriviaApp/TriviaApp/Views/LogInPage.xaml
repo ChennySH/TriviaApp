@@ -11,7 +11,7 @@
         <StackLayout>
             <Label Text="{Binding ErrorMessege}" HorizontalOptions="Center" TextColor="Red"/>
             <Label Text="Email: "/>
-            <Entry x:Name="EmailEntry" Placeholder="UserName" Text="{Binding Email}"></Entry>
+            <Entry  x:Name="EmailEntry" Placeholder="UserName" Text="{Binding Email}"></Entry>
             <Label Text="Passeword"/>
             <Entry x:Name="PasswordEntry" Placeholder="PassWord" Text="{Binding Password}" IsPassword="True"></Entry>
             <Button x:Name="LogInBtn" Text="Log In" Command="{Binding LoginCommand}"></Button>
