@@ -34,22 +34,38 @@ namespace TriviaApp.ViewModels
         {
             Random r = new Random();
             int CorrectAnswer = r.Next(0, Answers.Length);
-            Answers[CorrectAnswer] = new Answer { Text = Question.CorrectAnswer, IsCorrect = true };
+            Answers[CorrectAnswer] = new Answer 
+            { 
+                Text = Question.CorrectAnswer, 
+                IsCorrect = true 
+            };
             int InCorrectAnswer1 = r.Next(0, Answers.Length);
             while(InCorrectAnswer1 == CorrectAnswer)
                 InCorrectAnswer1 = r.Next(0, Answers.Length);
-            Answers[InCorrectAnswer1] = new Answer { Text = Question.OtherAnswers[0], IsCorrect = false };
+            Answers[InCorrectAnswer1] = new Answer 
+            { 
+                Text = Question.OtherAnswers[0], 
+                IsCorrect = false 
+            };
             int InCorrectAnswer2 = r.Next(0, Answers.Length);
             while(InCorrectAnswer2 == CorrectAnswer || InCorrectAnswer2 == InCorrectAnswer1)
                 InCorrectAnswer2 = r.Next(0, Answers.Length);
-            Answers[InCorrectAnswer2] = new Answer { Text = Question.OtherAnswers[1], IsCorrect = false };
+            Answers[InCorrectAnswer2] = new Answer 
+            { 
+                Text = Question.OtherAnswers[1], 
+                IsCorrect = false 
+            };
             int InCorrectAnswer3 = 0;
             for (int i = 1; i < Answers.Length; i++)
             {
                 if (i != CorrectAnswer && i != InCorrectAnswer1 && i != InCorrectAnswer2)
                     InCorrectAnswer3 = i;
             }
-            Answers[InCorrectAnswer3] = new Answer { Text = Question.OtherAnswers[2], IsCorrect = false };
+            Answers[InCorrectAnswer3] = new Answer 
+            { 
+                Text = Question.OtherAnswers[2], 
+                IsCorrect = false 
+            };
         }
     }
 }
