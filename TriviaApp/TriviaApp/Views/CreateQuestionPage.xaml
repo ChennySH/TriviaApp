@@ -3,13 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:p="clr-namespace:TriviaApp.ViewModels" x:DataType="p:CreateQuestionPageViewModel"
              mc:Ignorable="d"
              x:Class="TriviaApp.Views.CreateQuestionPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Button Text="Give Up Creating" Command="{Binding GiveUpCreationCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

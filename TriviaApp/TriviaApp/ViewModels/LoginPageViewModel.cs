@@ -91,6 +91,7 @@ namespace TriviaApp.ViewModels
                 {
                     HomePage p = new HomePage();
                     p.BindingContext = new HomePageViewModel(currentUser);
+                    p.SetEvents();
                     LogInEvent(p);
                 }
                 else

@@ -129,7 +129,14 @@ namespace TriviaApp.ViewModels
             proxy = TriviaAppWebApiProxy.CreateProxy();
         }
         public ICommand CreateQuestionCommand => new Command(CreateQuestion);
+        public ICommand GiveUpCreationCommand => new Command(GiveUpCreation);
 
+        private void GiveUpCreation(object obj)
+        {
+            BackToQuastionEvent();
+        }
+
+        public Action BackToQuastionEvent;
         private async void CreateQuestion()
         {
             if(questionText != "" && correctAnswer != "" && incorrectAnswer1 != ""
@@ -149,13 +156,15 @@ namespace TriviaApp.ViewModels
                 bool posted = await proxy.PostNewQuestionAsync(q);
                 if (posted)
                 {
-
+                    BackToQuastionEvent();
                 }
                 else
                 {
-
+                    errorMessege = "Somthing went worng";
                 }
             }
+            errorMessege = "Please fill all the entries";
+
         }
     }
 }

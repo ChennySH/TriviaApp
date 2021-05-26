@@ -6,7 +6,7 @@
              Title="{Binding UserName}">
     <ContentPage.Content>
         <StackLayout>
-            
+            <Button Text="Start Game" Command="{Binding StartGameCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

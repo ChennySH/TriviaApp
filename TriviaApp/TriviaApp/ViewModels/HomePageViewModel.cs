@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows.Input;
 using TriviaApp.Models;
+using Xamarin.Forms;
+using TriviaApp.Views;
 
 namespace TriviaApp.ViewModels
 {
@@ -35,6 +38,17 @@ namespace TriviaApp.ViewModels
                     OnPropertyChanged();
                 }
             }
+        }
+        public Action<Page> StartGameEvent;
+        public ICommand StartGameCommand => new Command(StartGame);
+
+        private void StartGame()
+        {
+            QuestionPage p = new QuestionPage();
+            p.BindingContext = new QuestionPageViewModel(CurrentUser);
+            ((QuestionPageViewModel)p.BindingContext).ResetQuestion();
+            p.SetEventsAndElements();
+            StartGameEvent(p);
         }
     }
 }

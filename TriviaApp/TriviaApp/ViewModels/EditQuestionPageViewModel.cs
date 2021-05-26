@@ -9,5 +9,6 @@ namespace TriviaApp.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+
     }
 }
