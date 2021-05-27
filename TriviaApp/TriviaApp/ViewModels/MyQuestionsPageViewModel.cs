@@ -6,5 +6,6 @@ namespace TriviaApp.ViewModels
 {
     class MyQuestionsPageViewModel
     {
+
     }
 }
