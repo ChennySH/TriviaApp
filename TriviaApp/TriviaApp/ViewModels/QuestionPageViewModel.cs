@@ -104,8 +104,6 @@ namespace TriviaApp.ViewModels
                 }
             }
         }
-
-
         public int Counter
         {
             get
@@ -203,7 +201,8 @@ namespace TriviaApp.ViewModels
         {
             Task<AmericanQuestion> t = this.proxy.GetRandomQuestionAsync();
             t.Wait();
-            Question = t.Result;
+            AmericanQuestion q = t.Result;
+            Question = q;
         }
         private void MatchAnswers()
         {
