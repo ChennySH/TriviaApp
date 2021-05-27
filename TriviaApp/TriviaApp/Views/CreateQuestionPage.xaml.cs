@@ -19,9 +19,20 @@ namespace TriviaApp.Views
         public void SetEventsAndElements()
         {
             ((CreateQuestionPageViewModel)this.BindingContext).BackToQuastionEvent += BackToQuestion;
+            ((CreateQuestionPageViewModel)this.BindingContext).QuestionCreatedEvent += QuestionCreated;
+        }
+        public void QuestionCreated()
+        {
+            MessegeLabel.TextColor = Color.DarkGreen;
+            QuestionTextEntry.IsEnabled = false;
+            IncorrectAnswer1Entry.IsEnabled = false;
+            IncorrectAnswer2Entry.IsEnabled = false;
+            IncorrectAnswer3Entry.IsEnabled = false;
+            CreateQuestionButton.IsEnabled = false;
         }
         public async void BackToQuestion()
         {
+
             await Navigation.PopAsync();
         }
     }

@@ -42,11 +42,10 @@ namespace TriviaApp.ViewModels
         public Action<Page> StartGameEvent;
         public ICommand StartGameCommand => new Command(StartGame);
 
-        private void StartGame()
+        private async void StartGame()
         {
             QuestionPage p = new QuestionPage();
-            p.BindingContext = new QuestionPageViewModel(CurrentUser);
-            ((QuestionPageViewModel)p.BindingContext).ResetQuestion();
+            p.BindingContext = await QuestionPageViewModel.CreateQuestionPageViewModel(CurrentUser);
             p.SetEventsAndElements();
             StartGameEvent(p);
         }

@@ -20,6 +20,22 @@ namespace TriviaApp.ViewModels
         private TriviaAppWebApiProxy proxy;
         private User currentUser;
         #region textProperties
+        private string backToGameBtnText;
+        public string BackToGameBtnText
+        {
+            get
+            {
+                return backToGameBtnText;
+            }
+            set
+            {
+                if(backToGameBtnText != value)
+                {
+                    backToGameBtnText = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private string questionText;
         public string QuestionText
         {
@@ -100,18 +116,18 @@ namespace TriviaApp.ViewModels
                 }
             }
         }
-        private string errorMessege;
-        public string ErrorMessege
+        private string messege;
+        public string Messege
         {
             get
             {
-                return errorMessege;
+                return messege;
             }
             set
             {
-                if(errorMessege != value)
+                if(messege != value)
                 {
-                    errorMessege = value;
+                    messege = value;
                     OnPropertyChanged();
                 }
             }
@@ -125,29 +141,30 @@ namespace TriviaApp.ViewModels
             incorrectAnswer1 = "";
             incorrectAnswer2 = "";
             incorrectAnswer3 = "";
-            errorMessege = "";
+            messege = "";
+            backToGameBtnText = "Give Up Creation";
             proxy = TriviaAppWebApiProxy.CreateProxy();
         }
         public ICommand CreateQuestionCommand => new Command(CreateQuestion);
-        public ICommand GiveUpCreationCommand => new Command(GiveUpCreation);
+        public ICommand BackToGameCommand => new Command(BackToGame);
 
-        private void GiveUpCreation(object obj)
+        private void BackToGame()
         {
             BackToQuastionEvent();
         }
 
         public Action BackToQuastionEvent;
+        public Action QuestionCreatedEvent;
         private async void CreateQuestion()
         {
-            if(questionText != "" && correctAnswer != "" && incorrectAnswer1 != ""
+            if (questionText != "" && correctAnswer != "" && incorrectAnswer1 != ""
                 && incorrectAnswer2 != "" && incorrectAnswer3 != "")
             {
-                AmericanQuestion q = new AmericanQuestion 
-                { 
-                    CreatorNickName = 
-                    currentUser.NickName, 
-                    QText = questionText, 
-                    CorrectAnswer = correctAnswer, 
+                AmericanQuestion q = new AmericanQuestion
+                {
+                    CreatorNickName = currentUser.NickName,
+                    QText = questionText,
+                    CorrectAnswer = correctAnswer,
                     OtherAnswers = new string[3],
                 };
                 q.OtherAnswers[0] = incorrectAnswer1;
@@ -156,14 +173,17 @@ namespace TriviaApp.ViewModels
                 bool posted = await proxy.PostNewQuestionAsync(q);
                 if (posted)
                 {
-                    BackToQuastionEvent();
+                    BackToGameBtnText = "Back to the game";
+                    Messege = "Question Created Succesfully!";
+                    QuestionCreatedEvent();
                 }
                 else
                 {
-                    errorMessege = "Somthing went worng";
+                    Messege = "Somthing went worng";
                 }
             }
-            errorMessege = "Please fill all the entries";
+            else
+                Messege = "Please fill all the entries";
 
         }
     }

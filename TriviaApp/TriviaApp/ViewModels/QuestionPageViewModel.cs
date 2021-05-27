@@ -156,7 +156,7 @@ namespace TriviaApp.ViewModels
         {
             get
             {
-                return BtnText;
+                return btnText;
             }
             set
             {
@@ -172,40 +172,37 @@ namespace TriviaApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         public event PropertyChangedEventHandler PropertyChanged;
-        public QuestionPageViewModel(User u)
+        public QuestionPageViewModel()
         {
-            this.currentUser = u;
-            this.counter = 1;
-            proxy = TriviaAppWebApiProxy.CreateProxy();
-            GetQuestion();
-            questionText = Question.QText;
-            Answers = new Answer[4];
-            MatchAnswers();
-            result = "";
-            BtnText = "Next Question";
+
         }
-        public void ResetQuestion()
+        public static async Task<QuestionPageViewModel> CreateQuestionPageViewModel(User u)
+        {
+            QuestionPageViewModel vm = new QuestionPageViewModel();
+            vm.currentUser = u;
+            vm.counter = 1;
+            vm.proxy = TriviaAppWebApiProxy.CreateProxy();
+            vm.Question = await vm.proxy.GetRandomQuestionAsync();
+            vm.Answers = new Answer[4];
+            vm.MatchAnswers();
+            vm.BtnText = "Next Question";
+            return vm;
+        }
+        public async void ResetQuestion()
         {
             proxy = TriviaAppWebApiProxy.CreateProxy();
-            GetQuestion();
-            questionText = Question.QText;
+            Question = await proxy.GetRandomQuestionAsync();
             Answers = new Answer[4];
             MatchAnswers();
-            result = "";
             if(counter < 3)
                 BtnText = "Next Question";
             else
                 BtnText = "Create Question";
         }
-        private void GetQuestion()
-        {
-            Task<AmericanQuestion> t = this.proxy.GetRandomQuestionAsync();
-            t.Wait();
-            AmericanQuestion q = t.Result;
-            Question = q;
-        }
         private void MatchAnswers()
         {
+            QuestionText = $"{Question.QText}\nUploaded By {Question.CreatorNickName}";
+            Result = "";
             Random r = new Random();
             int CorrectAnswer = r.Next(0, Answers.Length);
             Answers[CorrectAnswer] = new Answer 
@@ -308,6 +305,7 @@ namespace TriviaApp.ViewModels
 
         private void MoveToCreateQuestion()
         {
+            counter = 1;
             CreateQuestionPage p = new CreateQuestionPage();
             p.BindingContext = new CreateQuestionPageViewModel(currentUser);
             p.SetEventsAndElements();

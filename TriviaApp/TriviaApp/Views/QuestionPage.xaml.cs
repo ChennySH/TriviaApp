@@ -14,9 +14,11 @@ namespace TriviaApp.Views
     {
         private Button[] buttons;
         private Frame[] frames;
+        private bool onAppeared;
         public QuestionPage()
         {
-            InitializeComponent();     
+            InitializeComponent();
+            onAppeared = false;
         }
         public void SetEventsAndElements()
         {
@@ -24,7 +26,6 @@ namespace TriviaApp.Views
             ((QuestionPageViewModel)this.BindingContext).MoveToCreateQuestionEvent += MoveToCreateQuestion;
             ((QuestionPageViewModel)this.BindingContext).CorrectChosenEvent += CorrectAnswerChosen;
             ((QuestionPageViewModel)this.BindingContext).InCorrectChosenEvent += InCorrectAnswerChosen;
-            InitializeComponent();
             buttons = new Button[4];
             buttons[0] = Answer1Btn;
             buttons[1] = Answer2Btn;
@@ -37,8 +38,24 @@ namespace TriviaApp.Views
             frames[3] = Answer4Frm;
             NextPageBtn.IsEnabled = false;
         }
+        public void ResetColors()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                Color c = Color.LightBlue;
+                if (i == 1 || i == 2)
+                {
+                    c = Color.LightPink;
+                }
+                frames[i].BackgroundColor = c;
+                buttons[i].BackgroundColor = c;
+            }
+        }
         public void MoveToNextQuestion()
         {
+            NextPageBtn.IsEnabled = false;
+            ResetColors();
+            EnableAllButtons();
             ((QuestionPageViewModel)this.BindingContext).ResetQuestion();
         }
         public async void MoveToCreateQuestion(Page p)
@@ -47,26 +64,45 @@ namespace TriviaApp.Views
         }
         protected override void OnAppearing()
         {
+            
             base.OnAppearing();
-            if(this.BindingContext != null && this.BindingContext is QuestionPageViewModel)
+            if (onAppeared)
             {
-                ((QuestionPageViewModel)this.BindingContext).ResetQuestion();
+                MoveToNextQuestion();
+            }
+            else
+                onAppeared = true;
+        }
+        public void DisableAllButtons()
+        {
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                buttons[i].IsEnabled = false;
+            }
+        }
+        public void EnableAllButtons()
+        {
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                buttons[i].IsEnabled = true;
             }
         }
         public void CorrectAnswerChosen(int num)
         {
+            DisableAllButtons();
             buttons[num].BackgroundColor = Color.Green;
             frames[num].BackgroundColor = Color.Green;
-            ResultLabel.TextColor = Color.DarkGreen;
+            LabelOfResult.TextColor = Color.DarkGreen;
             NextPageBtn.IsEnabled = true;
         }
         public void InCorrectAnswerChosen(int chosen, int correct)
         {
+            DisableAllButtons();
             buttons[chosen].BackgroundColor = Color.Red;
             frames[chosen].BackgroundColor = Color.Red;
             buttons[correct].BackgroundColor = Color.Green;
             frames[correct].BackgroundColor = Color.Green;
-            ResultLabel.TextColor = Color.DarkRed;
+            LabelOfResult.TextColor = Color.DarkRed;
             NextPageBtn.IsEnabled = true;
         }
     }
