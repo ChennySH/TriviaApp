@@ -7,9 +7,9 @@ using Xamarin.Forms;
 
 namespace TriviaApp.ViewModels
 {
-    class MainPageViewModel : INotifyPropertyChanged
+    class MainPageViewModel //: INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+       // public event PropertyChangedEventHandler PropertyChanged;
         public Action PressLoginEvent;
         public Action PressRegisterEvent;
         public ICommand PressLogInCommand => new Command(PressLogin);

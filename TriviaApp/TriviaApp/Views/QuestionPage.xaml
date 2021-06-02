@@ -10,29 +10,29 @@
         <StackLayout>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column= "0" Grid.ColumnSpan= "2" Text= "{Binding QuestionText}" />
-                <Label x:Name= "LabelOfResult" Grid.Row= "1" Grid.Column= "0" Grid.ColumnSpan= "2" Text= "{Binding Result}" HorizontalOptions= "CenterAndExpand" />
-                <Frame x:Name= "Answer1Frm" Grid.Row= "2" Grid.Column= "0" BackgroundColor= "LightBlue" CornerRadius= "30" HorizontalOptions= "CenterAndExpand" VerticalOptions= "CenterAndExpand" >
-                    <Button x:Name= "Answer1Btn" BackgroundColor= "LightBlue" Text= "{Binding Answer1}" Command= "{Binding AnswerChosenCommand}" CommandParameter = "0" />
+                <Label Grid.Row="0" Grid.Column= "0" Grid.ColumnSpan= "2" Text= "{Binding QuestionText}" HorizontalOptions= "FillAndExpand" FontSize="16"/>
+                <Label x:Name= "LabelOfResult" Grid.Row= "1" Grid.Column= "0" Grid.ColumnSpan= "2" Text= "{Binding Result}" HorizontalOptions= "FillAndExpand" />
+                <Frame x:Name= "Answer1Frm" Grid.Row= "2" Grid.Column= "0" BackgroundColor= "LightBlue" CornerRadius= "30" HorizontalOptions= "FillAndExpand" VerticalOptions= "FillAndExpand" >
+                    <Button x:Name= "Answer1Btn" BackgroundColor= "LightBlue" Text= "{Binding Answer1}" Command= "{Binding AnswerChosenCommand}" CommandParameter = "0" FontSize="20"/>
                 </Frame>
-                <Frame x:Name= "Answer2Frm" Grid.Row= "2" Grid.Column= "1" BackgroundColor= "LightPink" CornerRadius= "30" HorizontalOptions= "CenterAndExpand" VerticalOptions= "CenterAndExpand" >
-                    <Button x:Name= "Answer2Btn" BackgroundColor= "LightPink" Text= "{Binding Answer2}" Command= "{Binding AnswerChosenCommand}" CommandParameter = "1" />
+                <Frame x:Name= "Answer2Frm" Grid.Row= "2" Grid.Column= "1" BackgroundColor= "LightPink" CornerRadius= "30" HorizontalOptions= "FillAndExpand" VerticalOptions= "FillAndExpand" >
+                    <Button x:Name= "Answer2Btn" BackgroundColor= "LightPink" Text= "{Binding Answer2}" Command= "{Binding AnswerChosenCommand}" CommandParameter = "1" FontSize="20"/>
                 </Frame>
-                <Frame x:Name= "Answer3Frm" Grid.Row= "3" Grid.Column= "0" BackgroundColor= "LightPink" CornerRadius= "30" HorizontalOptions= "CenterAndExpand" VerticalOptions= "CenterAndExpand" >
-                    <Button x:Name= "Answer3Btn" BackgroundColor= "LightPink" Text= "{Binding Answer3}" Command= "{Binding AnswerChosenCommand}" CommandParameter = "2" />
+                <Frame x:Name= "Answer3Frm" Grid.Row= "3" Grid.Column= "0" BackgroundColor= "LightPink" CornerRadius= "30" HorizontalOptions= "FillAndExpand" VerticalOptions= "FillAndExpand" >
+                    <Button x:Name= "Answer3Btn" BackgroundColor= "LightPink" Text= "{Binding Answer3}" Command= "{Binding AnswerChosenCommand}" CommandParameter = "2" FontSize="20"/>
                 </Frame>
-                <Frame x:Name= "Answer4Frm" Grid.Row= "3" Grid.Column= "1" BackgroundColor= "LightBlue" CornerRadius= "30" HorizontalOptions= "CenterAndExpand" VerticalOptions= "CenterAndExpand" >
-                    <Button x:Name= "Answer4Btn" BackgroundColor= "LightBlue" Text= "{Binding Answer4}" Command= "{Binding AnswerChosenCommand}" CommandParameter = "3" />
+                <Frame x:Name= "Answer4Frm" Grid.Row= "3" Grid.Column= "1" BackgroundColor= "LightBlue" CornerRadius= "30" HorizontalOptions="FillAndExpand"  VerticalOptions= "FillAndExpand" >
+                    <Button x:Name= "Answer4Btn" BackgroundColor= "LightBlue" Text= "{Binding Answer4}" Command= "{Binding AnswerChosenCommand}" CommandParameter = "3" FontSize="20"/>
                 </Frame>
                 <Button Grid.Row= "4" Grid.Column= "0" Grid.ColumnSpan="2" x:Name="NextPageBtn" Text="{Binding BtnText}" Command="{Binding NextButtonClickedCommand}" HorizontalOptions="Center"/>
             </Grid>

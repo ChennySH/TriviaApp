@@ -5,9 +5,9 @@ using System.Text;
 
 namespace TriviaApp.ViewModels
 {
-    class EditQuestionPageViewModel : INotifyPropertyChanged
+    class EditQuestionPageViewModel //: INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+       // public event PropertyChangedEventHandler PropertyChanged;
 
 
     }

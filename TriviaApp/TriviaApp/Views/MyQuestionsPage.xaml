@@ -3,36 +3,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:p="clr-namespace:TriviaApp.ViewModels" x:DataType="p:MyQuestionsPageViewModel"
              mc:Ignorable="d"
              x:Class="TriviaApp.Views.MyQuestionsPage">
-    <ContentPage.BindingContext>
-        <p:MyQuestionsPageViewModel></p:MyQuestionsPageViewModel>
-    </ContentPage.BindingContext>
+
     <ContentPage.Content>
         <StackLayout>
-            <CollectionView x:Name="QuestionsView" ItemsSource="{Binding QuestionsList}">
+            <CollectionView x:Name="QuestionsCollectionView" ItemsSource="{Binding QuestionsList}" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <SwipeView>
+                      <!--  <SwipeView> -->
+                                
+                                   
+
+
+                                
+                            <!--<SwipeView>
                             <SwipeView.LeftItems>
                                 <SwipeItems>
                                     <SwipeItem Text="Delete Question"
-                                    Command="{Binding Source={x:Reference QuestionsView},Path=BindingContext.DeleteQuestionCommand}"           
-                                    CommandParameter="{Binding}"
-                                    BackgroundColor="LightPink"/>
+                                               BackgroundColor="LightPink"/>
+                                    Command="{Binding Source={x:Reference QuestionsCollectionView},Path=BindingContext.DeleteQuestionCommand}"           
+                                    CommandParameter="{Binding}"                                
                                 </SwipeItems>
-                            </SwipeView.LeftItems>
-                            <Grid Padding="7">
+                            </SwipeView.LeftItems> -->
+                            <Grid Padding="6">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Text="{Binding QText}" Grid.Row="0" Grid.Column="0" BackgroundColor="LightGreen"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>                                
+                                <Button Text="{Binding QText}" BackgroundColor="LightGreen" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                             </Grid>
-                        </SwipeView>
+                     <!--   </SwipeView> -->
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
