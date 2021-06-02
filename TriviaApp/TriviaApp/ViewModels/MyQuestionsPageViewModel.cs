@@ -4,12 +4,15 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using TriviaApp.Models;
 using TriviaApp.Services;
+using Xamarin.Forms;
+using System.Collections.ObjectModel;
 
 namespace TriviaApp.ViewModels
 {
-    class MyQuestionsPageViewModel : INotifyPropertyChanged
+   class MyQuestionsPageViewModel : INotifyPropertyChanged
     {
         private TriviaAppWebApiProxy proxy;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -34,8 +37,7 @@ namespace TriviaApp.ViewModels
                 }
             }
         }
-        public List<AmericanQuestion> questionsList { get; set; }
-        public List<string> textsList { get; set; }
+        public ObservableCollection<AmericanQuestion> QuestionsList { get; set; }
         public static async Task<MyQuestionsPageViewModel> CreateMyQuestionsViewModel(User user)
         {
             TriviaAppWebApiProxy proxy = TriviaAppWebApiProxy.CreateProxy();
@@ -53,12 +55,13 @@ namespace TriviaApp.ViewModels
         private void SetProperties()
         {
             this.UserName = currentUser.NickName;
-            this.questionsList = new List<AmericanQuestion>();
-            this.textsList = new List<string>();
+            if (this.QuestionsList != null)
+                this.QuestionsList.Clear();
+            else
+                this.QuestionsList = new ObservableCollection<AmericanQuestion>();
             foreach (AmericanQuestion q in currentUser.Questions)
             {
-                this.questionsList.Add(q);
-                this.textsList.Add(q.QText);
+                this.QuestionsList.Add(q);
             }
         }
         public async void Reset()
@@ -68,14 +71,17 @@ namespace TriviaApp.ViewModels
             currentUser = await this.proxy.LoginAsync(email, password);
             SetProperties();
         }
-        public async void DeleteQuestion(int index)
+        public ICommand DeleteQuestionCommand => new Command<AmericanQuestion>(DeleteQuestion);
+        public async void DeleteQuestion(AmericanQuestion q)
         {
-            AmericanQuestion q = questionsList[index];
             bool deleted = await this.proxy.DeleteQuestionAsync(q);
             if (deleted)
             {
                 Reset();
+                //
+                //
             }
         }
+        public MyQuestionsPageViewModel() { }
     } 
 }

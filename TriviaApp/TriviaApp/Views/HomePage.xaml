@@ -4,9 +4,14 @@
              xmlns:p="clr-namespace:TriviaApp.ViewModels" x:DataType="p:HomePageViewModel"
              x:Class="TriviaApp.Views.HomePage"
              Title="{Binding UserName}">
+    <ContentPage.BindingContext>
+        <p:HomePageViewModel></p:HomePageViewModel>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
+            
             <Button Text="Start Game" Command="{Binding StartGameCommand}"/>
+            <Button Text="My Questions" Command="{Binding  MoveToMyQuestionsPageCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

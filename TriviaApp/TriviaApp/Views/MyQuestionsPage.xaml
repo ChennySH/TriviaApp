@@ -3,13 +3,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:p="clr-namespace:TriviaApp.ViewModels" x:DataType="p:MyQuestionsPageViewModel"
              mc:Ignorable="d"
              x:Class="TriviaApp.Views.MyQuestionsPage">
+    <ContentPage.BindingContext>
+        <p:MyQuestionsPageViewModel></p:MyQuestionsPageViewModel>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <CollectionView x:Name="QuestionsView" ItemsSource="{Binding QuestionsList}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Delete Question"
+                                    Command="{Binding Source={x:Reference QuestionsView},Path=BindingContext.DeleteQuestionCommand}"           
+                                    CommandParameter="{Binding}"
+                                    BackgroundColor="LightPink"/>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <Grid Padding="7">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding QText}" Grid.Row="0" Grid.Column="0" BackgroundColor="LightGreen"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>                                
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

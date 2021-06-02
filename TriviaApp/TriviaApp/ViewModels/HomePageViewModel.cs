@@ -22,6 +22,10 @@ namespace TriviaApp.ViewModels
             CurrentUser = u;
             userName = u.NickName;
         }
+        public HomePageViewModel()
+        {
+
+        }
         public User CurrentUser { get; set; }
         private string userName;
         public string UserName
@@ -41,13 +45,20 @@ namespace TriviaApp.ViewModels
         }
         public Action<Page> StartGameEvent;
         public ICommand StartGameCommand => new Command(StartGame);
-
         private async void StartGame()
         {
             QuestionPage p = new QuestionPage();
             p.BindingContext = await QuestionPageViewModel.CreateQuestionPageViewModel(CurrentUser);
             p.SetEventsAndElements();
             StartGameEvent(p);
+        }
+        public Action<Page> MoveToMyQuestionsEvent;
+        public ICommand MoveToMyQuestionsPageCommand => new Command(ToMyQuestionsPage);
+        private async void ToMyQuestionsPage()
+        {
+            MyQuestionsPage p = new MyQuestionsPage();
+            p.BindingContext = await MyQuestionsPageViewModel.CreateMyQuestionsViewModel(CurrentUser);
+            MoveToMyQuestionsEvent(p);
         }
     }
 }

@@ -20,8 +20,13 @@ namespace TriviaApp.Views
         public void SetEvents()
         {
             ((HomePageViewModel)this.BindingContext).StartGameEvent += StartGame;
+            ((HomePageViewModel)this.BindingContext).MoveToMyQuestionsEvent += MoveToMyQuestions;
         }
         public async void StartGame(Page p)
+        {
+            await Navigation.PushAsync(p);
+        }
+        public async void MoveToMyQuestions(Page p)
         {
             await Navigation.PushAsync(p);
         }
