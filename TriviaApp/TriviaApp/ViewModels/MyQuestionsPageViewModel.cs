@@ -44,6 +44,7 @@ namespace TriviaApp.ViewModels
             string email = user.Email;
             string password = user.Password;
             User updated = await proxy.LoginAsync(email, password);
+
             return new MyQuestionsPageViewModel(updated);
         }
         private MyQuestionsPageViewModel(User u)
@@ -78,10 +79,16 @@ namespace TriviaApp.ViewModels
             if (deleted)
             {
                 Reset();
-                //
-                //
             }
         }
-        public MyQuestionsPageViewModel() { }
+        public ICommand EditQuestionCommand => new Command<AmericanQuestion>(EditQuestion);
+
+        private void EditQuestion(AmericanQuestion q)
+        {
+            
+        }
+        public MyQuestionsPageViewModel()
+        {
+        }
     } 
 }

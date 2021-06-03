@@ -14,10 +14,10 @@
                         <SwipeView>                               
                             <SwipeView.LeftItems>
                                 <SwipeItems>
-                                        <SwipeItem Text="Delete Question"
+                                    <SwipeItem Text="Delete Question"
                                                BackgroundColor="LightPink"
                                     Command="{Binding Source={x:Reference QuestionsCollectionView},Path=BindingContext.DeleteQuestionCommand}"           
-                                    CommandParameter="{Binding}"/>
+                                    CommandParameter="{Binding}"/> 
                                     </SwipeItems>
                             </SwipeView.LeftItems> 
                             <Grid Padding="6">

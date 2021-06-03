@@ -7,8 +7,9 @@
              mc:Ignorable="d"
              x:Class="TriviaApp.Views.CreateQuestionPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label x:Name="MessegeLabel" Text="{Binding Messege}" TextColor="DarkRed"/>
+        <ScrollView Orientation="Vertical">
+            <StackLayout>
+                <Label x:Name="MessegeLabel" Text="{Binding Messege}" TextColor="DarkRed"/>
             <Label Text="Question Text"/>
             <Entry x:Name ="QuestionTextEntry" Placeholder="Question Text" Text="{Binding QuestionText}"/>
             <Label Text="Correct Answer"/>
@@ -22,5 +23,6 @@
             <Button x:Name="CreateQuestionButton" Text="Create Question" Command="{Binding CreateQuestionCommand}"/>
             <Button Text="{Binding BackToGameBtnText}" Command="{Binding BackToGameCommand}"/>
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
