@@ -11,21 +11,15 @@
             <CollectionView x:Name="QuestionsCollectionView" ItemsSource="{Binding QuestionsList}" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                      <!--  <SwipeView> -->
-                                
-                                   
-
-
-                                
-                            <!--<SwipeView>
+                        <SwipeView>                               
                             <SwipeView.LeftItems>
                                 <SwipeItems>
-                                    <SwipeItem Text="Delete Question"
-                                               BackgroundColor="LightPink"/>
+                                        <SwipeItem Text="Delete Question"
+                                               BackgroundColor="LightPink"
                                     Command="{Binding Source={x:Reference QuestionsCollectionView},Path=BindingContext.DeleteQuestionCommand}"           
-                                    CommandParameter="{Binding}"                                
-                                </SwipeItems>
-                            </SwipeView.LeftItems> -->
+                                    CommandParameter="{Binding}"/>
+                                    </SwipeItems>
+                            </SwipeView.LeftItems> 
                             <Grid Padding="6">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -35,7 +29,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Button Text="{Binding QText}" BackgroundColor="LightGreen" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                             </Grid>
-                     <!--   </SwipeView> -->
+                        </SwipeView> 
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
