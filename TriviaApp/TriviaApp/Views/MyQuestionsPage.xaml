@@ -4,11 +4,12 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="TriviaApp.Views.MyQuestionsPage">
+             x:Class="TriviaApp.Views.MyQuestionsPage"
+             Title="{Binding Title}">
 
     <ContentPage.Content>
         <StackLayout>
-            <CollectionView x:Name="QuestionsCollectionView" ItemsSource="{Binding QuestionsList}" >
+            <CollectionView x:Name="QuestionsCollectionView" ItemsSource="{Binding QuestionsList}" SelectionMode="Single" SelectionChangedCommand="{Binding OpenEditQuestionPageCommand}" SelectionChangedCommandParameter="{Binding Source={x:Reference QuestionsCollectionView},Path=SelectedItem}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <SwipeView>                               
@@ -27,7 +28,10 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Text="{Binding QText}" BackgroundColor="LightGreen" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                <Label Text="{Binding QText}" BackgroundColor="LightGreen" 
+                                        HorizontalOptions="FillAndExpand" HeightRequest="80" 
+                                        HorizontalTextAlignment="Center" FontSize="16" VerticalTextAlignment="Center" TextColor="Black"
+                                        />
                             </Grid>
                         </SwipeView> 
                     </DataTemplate>

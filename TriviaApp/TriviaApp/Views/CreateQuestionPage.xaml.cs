@@ -25,6 +25,7 @@ namespace TriviaApp.Views
         {
             MessegeLabel.TextColor = Color.DarkGreen;
             QuestionTextEntry.IsEnabled = false;
+            CorrectAnswerEntry.IsEnabled = false;
             IncorrectAnswer1Entry.IsEnabled = false;
             IncorrectAnswer2Entry.IsEnabled = false;
             IncorrectAnswer3Entry.IsEnabled = false;

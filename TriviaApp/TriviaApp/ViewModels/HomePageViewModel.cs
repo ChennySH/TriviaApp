@@ -20,25 +20,25 @@ namespace TriviaApp.ViewModels
         public HomePageViewModel(User u)
         {
             CurrentUser = u;
-            userName = u.NickName;
+            Title = $"{u.NickName}'s Home Page";
         }
         public HomePageViewModel()
         {
 
         }
         public User CurrentUser { get; set; }
-        private string userName;
-        public string UserName
+        private string title;
+        public string Title
         {
             get
             {
-                return userName;
+                return title;
             }
             set
             {
-                if (value != userName)
+                if (value != title)
                 {
-                    userName = value;
+                    title = value;
                     OnPropertyChanged();
                 }
             }
@@ -58,6 +58,7 @@ namespace TriviaApp.ViewModels
         {
             MyQuestionsPage p = new MyQuestionsPage();
             p.BindingContext = await MyQuestionsPageViewModel.CreateMyQuestionsViewModel(CurrentUser);
+            p.SetEvents();
             MoveToMyQuestionsEvent(p);
         }
     }

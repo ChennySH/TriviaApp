@@ -99,11 +99,28 @@ namespace TriviaApp.ViewModels
                 }
             }
         }
-        private AmericanQuestion question;
-        public EditQuestionPageViewModel(AmericanQuestion q, User u)
+        private string errorMessege;
+        public string ErrorMessege
         {
-            this.currentUser = u;
+            get
+            {
+                return errorMessege;
+            }
+            set
+            {
+                if(errorMessege != value)
+                {
+                    errorMessege = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private AmericanQuestion question;
+        public EditQuestionPageViewModel(AmericanQuestion q, User user)
+        {
+            this.ErrorMessege = "";
             this.question = q;
+            this.currentUser = user;
             this.proxy = TriviaAppWebApiProxy.CreateProxy();
             this.QuestionText = question.QText;
             this.CorrectAnswer = question.CorrectAnswer;
@@ -111,11 +128,49 @@ namespace TriviaApp.ViewModels
             this.IncorrectAnswer2 = question.OtherAnswers[1];
             this.IncorrectAnswer3 = question.OtherAnswers[2];
         }
-        public ICommand EditQuestionCommand => new Command(EditQuestion);
+        public ICommand ResetEntriesCommand => new Command(ResetEntries);
 
-        private void EditQuestion()
+        private void ResetEntries()
         {
-            
+            this.QuestionText = question.QText;
+            this.CorrectAnswer = question.CorrectAnswer;
+            this.IncorrectAnswer1 = question.OtherAnswers[0];
+            this.IncorrectAnswer2 = question.OtherAnswers[1];
+            this.IncorrectAnswer3 = question.OtherAnswers[2];
+            this.ErrorMessege = "";
         }
+        public ICommand EditQuestionCommand => new Command(EditQuestion);
+        private async void EditQuestion()
+        {
+            if (questionText != "" && correctAnswer != "" && incorrectAnswer1 != ""
+                && incorrectAnswer2 != "" && incorrectAnswer3 != "")
+            {
+                AmericanQuestion q = new AmericanQuestion
+                {
+                    CreatorNickName = currentUser.NickName,
+                    QText = questionText,
+                    CorrectAnswer = correctAnswer,
+                    OtherAnswers = new string[3],
+                };
+                q.OtherAnswers[0] = incorrectAnswer1;
+                q.OtherAnswers[1] = incorrectAnswer2;
+                q.OtherAnswers[2] = incorrectAnswer3;
+                bool originalDeleted = await this.proxy.DeleteQuestionAsync(this.question);
+                if (originalDeleted)
+                {
+                    await this.proxy.PostNewQuestionAsync(q);
+                    PopAction();
+                }
+                else
+                {
+                    this.ErrorMessege = "Somthing went worng";
+                }
+            }
+            else
+            {
+                this.ErrorMessege = "Please fill all the entries";
+            }
+        }
+        public Action PopAction;
     }
 }

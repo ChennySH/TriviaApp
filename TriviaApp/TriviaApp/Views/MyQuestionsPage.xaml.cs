@@ -18,6 +18,14 @@ namespace TriviaApp.Views
             InitializeComponent();
             appeard = false;
         }
+        public void SetEvents()
+        {
+            ((MyQuestionsPageViewModel)this.BindingContext).MoveToEditQuestionPageEvent += MoveToEditQuestionPage;
+        }
+        public async void MoveToEditQuestionPage(Page p)
+        {
+            await Navigation.PushAsync(p);
+        }
         protected override void OnAppearing()
         {
             base.OnAppearing();

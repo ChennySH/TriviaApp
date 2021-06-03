@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using TriviaApp.Models;
 using TriviaApp.Services;
+using TriviaApp.Views;
 using Xamarin.Forms;
 using System.Collections.ObjectModel;
 
@@ -21,18 +22,19 @@ namespace TriviaApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         public User currentUser { get; set; }
-        private string userName;
-        public string UserName
+
+        private string title;
+        public string Title
         {
             get
             {
-                return userName;
+                return title;
             }
             set
             {
-                if (userName != value)
+                if(title != value)
                 {
-                    userName = value;
+                    title = value;
                     OnPropertyChanged();
                 }
             }
@@ -55,7 +57,7 @@ namespace TriviaApp.ViewModels
         }
         private void SetProperties()
         {
-            this.UserName = currentUser.NickName;
+            this.Title = $"{currentUser.NickName}'s Questions";
             if (this.QuestionsList != null)
                 this.QuestionsList.Clear();
             else
@@ -65,6 +67,16 @@ namespace TriviaApp.ViewModels
                 this.QuestionsList.Add(q);
             }
         }
+        public ICommand OpenEditQuestionPageCommand => new Command<AmericanQuestion>(OpenEditQuestionPage);
+        public Action<Page> MoveToEditQuestionPageEvent;
+        private void OpenEditQuestionPage(AmericanQuestion q)
+        {
+            EditQuestionPage p = new EditQuestionPage();
+            p.BindingContext = new EditQuestionPageViewModel(q, currentUser);
+            p.SetEvents();
+            MoveToEditQuestionPageEvent(p);
+        }
+
         public async void Reset()
         {
             string email = currentUser.Email;

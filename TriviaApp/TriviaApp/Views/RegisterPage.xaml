@@ -9,13 +9,13 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="{Binding ErrorMessege}" HorizontalOptions="Center" TextColor="Red"/>
-            <Label Text="Email"/>
+            <Label Text="Email:" FontSize="Medium" TextColor="Black"/>
             <Entry Placeholder="Email" Text="{Binding Email}"/>
-            <Label Text="NickName"/>
+            <Label Text="NickName:" FontSize="Medium" TextColor="Black"/>
             <Entry Placeholder="NickName" Text="{Binding NickName}"/>
-            <Label Text="Password"/>
+            <Label Text="Password:" FontSize="Medium" TextColor="Black"/>
             <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True"/>
-            <Label Text="Repeat Password"/>
+            <Label Text="Repeat Password:" FontSize="Medium" TextColor="Black"/>
             <Entry Placeholder="Repeat Password" Text="{Binding RepeatedPasseord}" IsPassword="True"/>
             <Button Text="Register" Command="{Binding RegisterCommand}" HorizontalOptions="Center"/>
         </StackLayout>

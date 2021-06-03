@@ -31,11 +31,6 @@ namespace TriviaApp.Views
             buttons[1] = Answer2Btn;
             buttons[2] = Answer3Btn;
             buttons[3] = Answer4Btn;
-            frames = new Frame[4];
-            frames[0] = Answer1Frm;
-            frames[1] = Answer2Frm;
-            frames[2] = Answer3Frm;
-            frames[3] = Answer4Frm;
             NextPageBtn.IsEnabled = false;
         }
         public void ResetColors()
@@ -47,7 +42,6 @@ namespace TriviaApp.Views
                 {
                     c = Color.LightPink;
                 }
-                frames[i].BackgroundColor = c;
                 buttons[i].BackgroundColor = c;
             }
         }
@@ -91,7 +85,6 @@ namespace TriviaApp.Views
         {
             DisableAllButtons();
             buttons[num].BackgroundColor = Color.Green;
-            frames[num].BackgroundColor = Color.Green;
             LabelOfResult.TextColor = Color.DarkGreen;
             NextPageBtn.IsEnabled = true;
         }
@@ -99,9 +92,7 @@ namespace TriviaApp.Views
         {
             DisableAllButtons();
             buttons[chosen].BackgroundColor = Color.Red;
-            frames[chosen].BackgroundColor = Color.Red;
             buttons[correct].BackgroundColor = Color.Green;
-            frames[correct].BackgroundColor = Color.Green;
             LabelOfResult.TextColor = Color.DarkRed;
             NextPageBtn.IsEnabled = true;
         }

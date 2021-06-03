@@ -23,7 +23,6 @@ namespace TriviaApp.ViewModels
         private User currentUser;
         public AmericanQuestion Question { get; set; }
         public Answer[] Answers { get; set; }
-        private int counter;
         private string answer1;
         public string Answer1
         {
@@ -104,6 +103,7 @@ namespace TriviaApp.ViewModels
                 }
             }
         }
+        private int counter;
         public int Counter
         {
             get
@@ -115,6 +115,23 @@ namespace TriviaApp.ViewModels
                 if(counter != value)
                 {
                     counter = value;
+                    OnPropertyChanged();
+                    this.CounterText = $"You Answered {counter} corrects answers in a row";
+                }
+            }
+        }
+        private string counterText;
+        public string CounterText
+        {
+            get
+            {
+                return counterText;
+            }
+            set
+            {
+                if(this.counterText != value)
+                {
+                    this.counterText = value;
                     OnPropertyChanged();
                 }
             }
@@ -180,7 +197,8 @@ namespace TriviaApp.ViewModels
         {
             QuestionPageViewModel vm = new QuestionPageViewModel();
             vm.currentUser = u;
-            vm.counter = 1;
+            vm.Counter = 0;
+            vm.CounterText = $"You Answered {vm.Counter} corrects answers in a row";
             vm.proxy = TriviaAppWebApiProxy.CreateProxy();
             vm.Question = await vm.proxy.GetRandomQuestionAsync();
             vm.Answers = new Answer[4];
@@ -194,10 +212,7 @@ namespace TriviaApp.ViewModels
             Question = await proxy.GetRandomQuestionAsync();
             Answers = new Answer[4];
             MatchAnswers();
-            if(counter < 3)
-                BtnText = "Next Question";
-            else
-                BtnText = "Create Question";
+            BtnText = "Next Question";
         }
         private void MatchAnswers()
         {
@@ -251,7 +266,7 @@ namespace TriviaApp.ViewModels
 
         private void NextButtonClicked()
         {
-            if(counter == 3)
+            if(Counter == 3)
             {
                 MoveToCreateQuestion();
             }
@@ -280,10 +295,16 @@ namespace TriviaApp.ViewModels
             if (Answers[obj].IsCorrect)
             {
                 CorrectChosenEvent(obj);
+                Counter++;
+                if(Counter == 3)
+                {
+                    BtnText = "Create Question";
+                }
                 Result = "You chose the correct answer!";
             }
             else
             {
+                Counter = 0;
                 InCorrectChosenEvent(obj, CorrectAnswerNum);
                 Result = "You chose incorrectly!";
 
@@ -294,18 +315,13 @@ namespace TriviaApp.ViewModels
 
         private void NextQuestion()
         {
-            if (Counter < 3)
-                Counter++;
-            else
-                counter = 1;
             NextQuestionEvent();
-
         }
       //  public ICommand MoveToCreateQuestionCommand => new Command(MoveToCreateQuestion);
 
         private void MoveToCreateQuestion()
         {
-            counter = 1;
+            Counter = 0;
             CreateQuestionPage p = new CreateQuestionPage();
             p.BindingContext = new CreateQuestionPageViewModel(currentUser);
             p.SetEventsAndElements();

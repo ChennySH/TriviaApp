@@ -3,13 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:p="clr-namespace:TriviaApp.ViewModels" x:DataType="p:EditQuestionPageViewModel"
              mc:Ignorable="d"
-             x:Class="TriviaApp.Views.EditQuestionPage">
+             x:Class="TriviaApp.Views.EditQuestionPage"
+             >
     <ContentPage.Content>
+        <ScrollView Orientation="Vertical">
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label x:Name="MessegeLabel" Text="{Binding ErrorMessege}" TextColor="DarkRed"/>
+            <Label Text="Question Text:" FontSize="Medium" TextColor="Black"/>
+            <Entry x:Name ="QuestionTextEntry" Placeholder="Question Text" Text="{Binding QuestionText}"/>
+            <Label Text="Correct Answer:" FontSize="Medium" TextColor="Black"/>
+            <Entry x:Name="CorrectAnswerEntry" Placeholder="Correct Answer" Text="{Binding CorrectAnswer}"/>
+            <Label Text="Incorrect Answer 1:" FontSize="Medium" TextColor="Black"/>
+            <Entry x:Name="IncorrectAnswer1Entry" Placeholder="Incorrect Answer 1" Text="{Binding IncorrectAnswer1}"/>
+            <Label Text="Incorrect Answer 2:" FontSize="Medium" TextColor="Black"/>
+            <Entry x:Name="IncorrectAnswer2Entry" Placeholder="Incorrect Answer 1" Text="{Binding IncorrectAnswer2}"/>
+            <Label Text="Incorrect Answer 3:" FontSize="Medium" TextColor="Black"/>
+            <Entry x:Name="IncorrectAnswer3Entry" Placeholder="Incorrect Answer 3" Text="{Binding IncorrectAnswer3}"/>
+            <Button x:Name="EditQuestionButton" Text="Edit Question" Command="{Binding EditQuestionCommand}"/>
+            <Button x:Name="ResetQuestionButton" Text="Reset" Command="{Binding ResetEntriesCommand}"/>
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
