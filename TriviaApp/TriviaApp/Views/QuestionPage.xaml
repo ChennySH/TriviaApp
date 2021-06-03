@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:p ="clr-namespace:TriviaApp.ViewModels" x:DataType="p:QuestionPageViewModel"
              mc:Ignorable="d"
-             x:Class="TriviaApp.Views.QuestionPage">
+             x:Class="TriviaApp.Views.QuestionPage"
+             Title="Game">
     <ContentPage.Content>
         <StackLayout>
             <Grid>

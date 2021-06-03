@@ -93,14 +93,5 @@ namespace TriviaApp.ViewModels
                 Reset();
             }
         }
-        public ICommand EditQuestionCommand => new Command<AmericanQuestion>(EditQuestion);
-
-        private void EditQuestion(AmericanQuestion q)
-        {
-            
-        }
-        public MyQuestionsPageViewModel()
-        {
-        }
     } 
 }

@@ -5,9 +5,6 @@
              x:Class="TriviaApp.Views.HomePage"
              Title="{Binding Title}"
              >
-    <ContentPage.BindingContext>
-        <p:HomePageViewModel></p:HomePageViewModel>
-    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
             

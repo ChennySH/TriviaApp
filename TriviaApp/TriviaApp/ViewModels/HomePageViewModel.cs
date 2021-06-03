@@ -22,10 +22,6 @@ namespace TriviaApp.ViewModels
             CurrentUser = u;
             Title = $"{u.NickName}'s Home Page";
         }
-        public HomePageViewModel()
-        {
-
-        }
         public User CurrentUser { get; set; }
         private string title;
         public string Title
