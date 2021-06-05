@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:p="clr-namespace:TriviaApp.ViewModels" x:DataType="p:CreateQuestionPageViewModel"
              mc:Ignorable="d"
-             x:Class="TriviaApp.Views.CreateQuestionPage">
+             x:Class="TriviaApp.Views.CreateQuestionPage"
+             Title="Create Question">
     <ContentPage.Content>
         <ScrollView Orientation="Vertical">
             <StackLayout>

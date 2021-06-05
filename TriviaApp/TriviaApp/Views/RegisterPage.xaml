@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:p="clr-namespace:TriviaApp.ViewModels" x:DataType="p:RegisterPageViewModel"
              mc:Ignorable="d"
-             x:Class="TriviaApp.Views.RegisterPage">
+             x:Class="TriviaApp.Views.RegisterPage"
+             Title="Register Page">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="{Binding ErrorMessege}" HorizontalOptions="Center" TextColor="Red"/>
